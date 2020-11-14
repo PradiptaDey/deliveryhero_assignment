@@ -1,5 +1,4 @@
 const ApiContext = require('./apiContext');
-const ApplicationError = require('./applicationError');
 /**
  * Provides a class that routes express requests to a controller type
  * @memberof base
@@ -110,12 +109,7 @@ class ControllerFactory {
 
                 await controller[method].apply(controller, methodArguments);
             } catch (error) {
-
-              if (controller && error instanceof ApplicationError) {
-                controller.respondError(error, error.code);
-              } else {
                 next(error);
-              }
             }
         };
     }
